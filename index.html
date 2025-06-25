@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NIREL YISASHAR – Cyber Identity</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Share+Tech+Mono&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,13 +12,11 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       height: 100%;
       font-family: 'Orbitron', sans-serif;
       color: #fff;
       text-align: center;
-      overflow: hidden;
       background-color: black;
     }
 
@@ -29,10 +24,11 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: 0;
       overflow: hidden;
+      pointer-events: none;
     }
 
     .video-bg video {
@@ -49,16 +45,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100%;
+      min-height: 100vh;
       padding: 20px;
+      text-align: center;
     }
 
     img.logo {
-      width: 150px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       border: 4px solid #0ff;
       box-shadow: 0 0 25px #0ff;
       margin-bottom: 20px;
+      object-fit: cover;
     }
 
     .glitch {
@@ -78,7 +77,6 @@
       top: 0;
       left: 0;
       width: 100%;
-      overflow: hidden;
     }
 
     .glitch::before {
@@ -94,71 +92,19 @@
     }
 
     @keyframes glitch-before {
-      0% {
-        clip-path: inset(0 0 90% 0);
-        transform: translate(-2px, -2px);
-      }
-      20% {
-        clip-path: inset(10% 0 85% 0);
-        transform: translate(2px, 2px);
-      }
-      40% {
-        clip-path: inset(20% 0 70% 0);
-        transform: translate(-3px, 1px);
-      }
-      60% {
-        clip-path: inset(30% 0 50% 0);
-        transform: translate(3px, -1px);
-      }
-      80% {
-        clip-path: inset(40% 0 30% 0);
-        transform: translate(-1px, -3px);
-      }
-      100% {
-        clip-path: inset(50% 0 0 0);
-        transform: translate(0, 0);
-      }
+      0% { clip-path: inset(0 0 90% 0); transform: translate(-2px, -2px); }
+      100% { clip-path: inset(50% 0 0 0); transform: translate(0, 0); }
     }
 
     @keyframes glitch-after {
-      0% {
-        clip-path: inset(0 0 95% 0);
-        transform: translate(2px, 2px);
-      }
-      25% {
-        clip-path: inset(15% 0 80% 0);
-        transform: translate(-2px, 1px);
-      }
-      50% {
-        clip-path: inset(30% 0 60% 0);
-        transform: translate(1px, -2px);
-      }
-      75% {
-        clip-path: inset(45% 0 40% 0);
-        transform: translate(-1px, -1px);
-      }
-      100% {
-        clip-path: inset(60% 0 20% 0);
-        transform: translate(0, 0);
-      }
+      0% { clip-path: inset(0 0 95% 0); transform: translate(2px, 2px); }
+      100% { clip-path: inset(60% 0 20% 0); transform: translate(0, 0); }
     }
 
     @keyframes glitch-skew {
-      0% {
-        transform: skew(0deg);
-      }
-      25% {
-        transform: skew(1deg);
-      }
-      50% {
-        transform: skew(-1deg);
-      }
-      75% {
-        transform: skew(0.5deg);
-      }
-      100% {
-        transform: skew(0deg);
-      }
+      0% { transform: skew(0deg); }
+      50% { transform: skew(-1deg); }
+      100% { transform: skew(0deg); }
     }
 
     .info {
@@ -169,12 +115,7 @@
       box-shadow: 0 0 15px #0ff;
       font-size: 1em;
       line-height: 1.6em;
-      max-width: 90%;
-    }
-
-    /* Bigger font for the strong text inside .info paragraph */
-    .info p strong {
-      font-size: 1.3em;
+      max-width: 90vw;
     }
 
     .btn {
@@ -188,9 +129,8 @@
       border-radius: 30px;
       text-decoration: none;
       box-shadow: 0 0 15px #0ff;
-      transition: 0.3s;
-      width: 200px;
-      text-align: center;
+      transition: transform 0.3s ease;
+      width: 220px;
     }
 
     .btn:hover {
@@ -199,26 +139,39 @@
     }
 
     footer {
-      margin-top: 20px;
+      margin-top: 30px;
       color: #aaa;
       font-size: 0.9em;
     }
 
-    @media (max-width: 768px) {
+    @media screen and (max-width: 768px) {
       .glitch {
         font-size: 2em;
       }
 
       .info {
         font-size: 0.95em;
+        padding: 15px;
       }
 
       img.logo {
-        width: 120px;
+        width: 160px;
+        height: 160px;
       }
 
       .btn {
-        width: 90%;
+        width: 90vw;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .glitch {
+        font-size: 1.5em;
+      }
+
+      .btn {
+        font-size: 0.9em;
+        padding: 10px 20px;
       }
     }
   </style>
@@ -226,30 +179,21 @@
 <body>
   <div class="video-bg">
     <video autoplay muted loop playsinline>
-      <source src="background.mp4" type="video/mp4" />
+      <source src="background.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
 
   <div class="content">
-    <img src="nirel_logo.jpeg" alt="Logo" class="logo" />
+    <img src="nirel_logo.jpeg" alt="Nirel Yisashar Logo" class="logo">
     <div class="glitch" data-text="NIREL YISASHAR">NIREL YISASHAR</div>
     <div class="info">
       <p><strong>Cyber Researcher | Developer | HUMINT</strong></p>
-      <p>
-        Experience in ethical hacking, OSINT, and complex systems analysis.
-        Striving for advanced security and technological innovation.
-      </p>
+      <p>Experienced in ethical hacking, OSINT, and complex system analysis. Striving for advanced security and technological innovation.</p>
     </div>
-    <a href="https://il.linkedin.com/in/nirel-yisashar-94773b323" class="btn" target="_blank"
-      >🔗 LinkedIn</a
-    >
-    <a href="https://www.tiktok.com/@nirel_yisashar" class="btn" target="_blank"
-      >🎥 TikTok</a
-    >
-    <a href="https://github.com/NirelYisashar" class="btn" target="_blank"
-      >💻 GitHub</a
-    >
+    <a href="https://il.linkedin.com/in/nirel-yisashar-94773b323" class="btn" target="_blank">🔗 LinkedIn</a>
+    <a href="https://www.tiktok.com/@nirel_yisashar" class="btn" target="_blank">🎥 TikTok</a>
+    <a href="https://github.com/NirelYisashar" class="btn" target="_blank">💻 GitHub</a>
     <footer>&copy; 2025 All rights reserved</footer>
   </div>
 </body>
